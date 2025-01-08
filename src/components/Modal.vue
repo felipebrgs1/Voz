@@ -1,9 +1,9 @@
 <template>
-  <div class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75">
-    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-3xl">
+  <div class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75" @click="handleClickOutside">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-3xl modal-content">
       <h2 class="text-2xl font-bold mb-4">{{ project.title }}</h2>
       <div class="mb-4">
-        <img v-if="project.imageUrl" :src="project.imageUrl" :alt="project.title" class="object-cover w-full  mb-4" />
+        <img v-if="project.imageUrl" :src="project.imageUrl" :alt="project.title" class="object-cover w-full mb-4" />
         <div v-else class="h-48 bg-gray-200 flex items-center justify-center mb-4">
           <span class="text-gray-400">Imagem não disponível</span>
         </div>
@@ -33,7 +33,7 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits } from 'vue';
+import { defineProps, defineEmits, onMounted, onUnmounted } from 'vue';
 
 const props = defineProps({
   project: {
@@ -47,4 +47,24 @@ const emit = defineEmits(['close']);
 const close = () => {
   emit('close');
 };
+
+const handleClickOutside = (event) => {
+  if (!event.target.closest('.modal-content')) {
+    close();
+  }
+};
+
+const handleKeydown = (event) => {
+  if (event.key === 'Escape') {
+    close();
+  }
+};
+
+onMounted(() => {
+  window.addEventListener('keydown', handleKeydown);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('keydown', handleKeydown);
+});
 </script>

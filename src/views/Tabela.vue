@@ -1,6 +1,6 @@
 <template>
   <div class="container mx-auto pt-20">
-    <div class="flex flex-row pb-4">
+    <div class="flex flex-row pb-4 px-2">
       <div class="basis-3/4">
         <p class="text-2xl font-bold">Tabela de carros</p>
       </div>
@@ -43,6 +43,7 @@ const fetchCars = async () => {
 
 const handleDelete = (carId: number) => {
   cars.value = cars.value.filter(car => car.id !== carId);
+  selectedCar.value = null;
 };
 
 const selectedCar = ref(null);

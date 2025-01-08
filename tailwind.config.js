@@ -7,6 +7,9 @@ export default {
         center: true,
       },
     },
+    fontFamily: {
+      sans: ['Montserrat', 'sans-serif'], // Define Montserrat como a fonte padrão
+    },
   },
   plugins: [],
 };

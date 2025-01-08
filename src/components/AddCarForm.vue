@@ -2,39 +2,39 @@
   <div class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50">
     <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-3xl">
       <h3 class="text-xl font-bold mb-4">Adicionar Novo Carro</h3>
-      <form @submit.prevent="addCar">
+      <form @submit.prevent="handleAddCar">
         <div class="mb-4">
           <label for="title" class="block text-gray-700 font-bold mb-2">Título</label>
-          <input type="text" id="title" v-model="newCar.title"
+          <input type="text" id="title" v-model="carStore.newCar.title"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             required />
         </div>
         <div class="mb-4">
           <label for="imageUrl" class="block text-gray-700 font-bold mb-2">URL da Imagem</label>
-          <input type="text" id="imageUrl" v-model="newCar.imageUrl"
+          <input type="text" id="imageUrl" v-model="carStore.newCar.imageUrl"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
         </div>
         <div class="mb-4">
           <label for="data" class="block text-gray-700 font-bold mb-2">Ano</label>
-          <input type="number" id="data" v-model="newCar.data"
+          <input type="number" id="data" v-model="carStore.newCar.data"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             min="1900" max="2100" required />
         </div>
         <div class="mb-4">
           <label for="velocidademaxima" class="block text-gray-700 font-bold mb-2">Velocidade Máxima</label>
-          <input type="text" id="velocidademaxima" v-model="newCar.velocidademaxima"
+          <input type="text" id="velocidademaxima" v-model="carStore.newCar.velocidademaxima"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             required />
         </div>
         <div class="mb-4">
           <label for="potencia" class="block text-gray-700 font-bold mb-2">Potência</label>
-          <input type="text" id="potencia" v-model="newCar.potencia"
+          <input type="text" id="potencia" v-model="carStore.newCar.potencia"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             min="0" max="10" required />
         </div>
         <div class="mb-4">
           <label for="conforto" class="block text-gray-700 font-bold mb-2">Conforto</label>
-          <input type="text" id="conforto" v-model="newCar.conforto"
+          <input type="text" id="conforto" v-model="carStore.newCar.conforto"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             min="0" max="10" required />
         </div>
@@ -55,38 +55,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineEmits } from 'vue';
-import axios from 'axios';
+import { defineEmits } from 'vue';
+import { useCarStore } from '../store/CarStore';
 
 const emit = defineEmits(['close', 'carAdded']);
+const carStore = useCarStore();
 
-const newCar = ref({
-  title: '',
-  description: '',
-  imageUrl: '',
-  data: '',
-  velocidademaxima: '',
-  potencia: '',
-  conforto: ''
-});
-
-const addCar = async () => {
-  try {
-    const response = await axios.post('http://localhost:3000/Tabela', newCar.value);
-    emit('carAdded', response.data);
-    newCar.value = {
-      title: '',
-      description: '',
-      imageUrl: '',
-      data: '',
-      velocidademaxima: '',
-      potencia: '',
-      conforto: ''
-    };
+const handleAddCar = async () => {
+  const newCar = await carStore.addCar();
+  if (newCar) {
+    emit('carAdded', newCar);
     closeModal();
-    console.log('Carro adicionado com sucesso:', response.data);
-  } catch (error) {
-    console.error('Erro ao adicionar carro:', error.message);
   }
 };
 
