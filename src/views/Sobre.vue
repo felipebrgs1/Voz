@@ -1,6 +1,5 @@
 <template>
-  <div
-    class="bg-white border-2 rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300 p-6 flex flex-col items-center">
+  <div class="pt-28 content-center  bg-white rounded-lg shadow-lg overflow-hidden flex flex-col items-center">
     <h2 class="font-bold text-3xl mb-6 text-gray-800">Sobre Nós</h2>
     <div class="relative h-full w-full overflow-hidden flex items-center justify-center mb-6">
     </div>
@@ -27,7 +26,7 @@
         Visite-nos em nossa loja ou entre em contato conosco para agendar uma visita. Estamos ansiosos para atendê-lo!
       </p>
     </div>
-    <div class="mt-6 flex justify-center">
+    <div class="mt-6 flex justify-center pb-4">
       <button @click="openContactModal" class="bg-blue-500 text-white px-6 py-3 rounded mr-2">Contato</button>
       <button @click="openTestDriveModal" class="bg-green-500 text-white px-6 py-3 rounded">Test Drive</button>
     </div>
