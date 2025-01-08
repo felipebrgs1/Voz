@@ -1,70 +1,72 @@
 <template>
-  <div class="transform hover:scale-105 transition-transform duration-300">
-    <div class="relative h-48 z-10 translate-y-10">
-      <img v-if="project.imageUrl" :src="project.imageUrl" :alt="project.title" class="w-full h-full object-cover" />
-      <div v-else class="h-full bg-gray-200 flex items-center justify-center">
-        <span class="text-gray-400">Imagem não disponível</span>
-      </div>
-    </div>
-    <div class="p-6 border-solid border-2 border-gray-500 rounded-3xl shadow-lg text-center texto">
-      <h3 class="text-2xl my-2">{{ project.title }}</h3>
-      <div class="grid grid-cols-2  mt-4">
-        <div class="flex  ml-4">
-          <img src="/data.png" class="size-8" />
-        </div>
-        <div class="flex items-center">
-          <span>{{ project.data }}</span>
-        </div>
-
-        <div class="flex  ml-4 mt-2">
-          <img src="/velocidademaxima.png" class="size-8" />
-        </div>
-        <div class="flex items-center ">
-          <span>{{ project.velocidademaxima + " Km/h" }}</span>
-        </div>
-
-        <div class="flex  ml-4 mt-2">
-          <img src="/potencia.png" class="size-8" />
-        </div>
-        <div class="flex items-center ">
-          <span>{{ project.potencia + "/10" }}</span>
-        </div>
-
-        <div class="flex ml-4 mt-2">
-          <img src="/conforto.png" class="size-8" />
-        </div>
-        <div class="flex items-center">
-          <span>{{ project.conforto + "/10" }}</span>
+  <div>
+    <div class="transform hover:scale-105 transition-transform duration-300 relative z-10">
+      <div class="relative h-48 z-10 translate-y-10">
+        <img v-if="project.imageUrl" :src="project.imageUrl" :alt="project.title" class="w-full h-full object-cover" />
+        <div v-else class="h-full bg-gray-200 flex items-center justify-center">
+          <span class="text-gray-400">Imagem não disponível</span>
         </div>
       </div>
-      <button type="button"
-        class="mt-4 text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
-        Ver carro
-      </button>
+      <div class="p-6 border-solid border border-color rounded-3xl shadow-lg text-center texto">
+        <h3 class="text-2xl mt-4 mb-6">{{ project.title }}</h3>
+        <div class="grid grid-cols-4 gap-6 mt-4">
+          <div class="flex items-center justify-center">
+            <img src="/data.png" class="inline size-8" />
+          </div>
+          <div class="flex items-center col-span-3">
+            <span>{{ project.data }}</span>
+          </div>
+          <div class="flex justify-center">
+            <img src="/velocidademaxima.png" class="inline size-8" />
+          </div>
+          <div class="flex items-center col-span-3">
+            <span>{{ project.velocidademaxima + " Km/h" }}</span>
+          </div>
+          <div class="flex items-center justify-center">
+            <img src="/potencia.png" class="inline size-8" />
+          </div>
+          <div class="flex items-center col-span-3">
+            <span>{{ project.potencia + "/10" }}</span>
+          </div>
+          <div class="flex items-center justify-center">
+            <img src="/conforto.png" class="inline size-8" />
+          </div>
+          <div class="flex items-center col-span-3">
+            <span>{{ project.conforto + "/10" }}</span>
+          </div>
+        </div>
+        <button type="button"
+          class="mt-4 text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-2xl text-sm px-16 py-4 text-center me-2 mb-2"
+          @click="toggleModal">
+          Ver carro
+        </button>
+      </div>
     </div>
+
+    <CarModal v-if="isModalOpen" :project="project" :is-open="isModalOpen" @close="closeModal" />
   </div>
 </template>
 
 <script setup>
-defineProps({
+import { ref } from 'vue';
+import CarModal from './Modal.vue';
+
+const props = defineProps({
   project: {
     type: Object,
-    required: true,
-    default: () => ({
-      imageUrl: '',
-      title: '',
-      description: '',
-      data: '',
-      velocidademaxima: '',
-      potencia: '',
-      conforto: ''
-    })
+    required: true
   }
-})
-</script>
+});
 
-<style lang="css" scoped>
-.texto {
-  color: #1D2527;
-}
-</style>
+const isModalOpen = ref(false);
+
+const toggleModal = () => {
+  isModalOpen.value = true;
+  document.body.style.overflow = 'hidden';
+};
+
+const closeModal = () => {
+  isModalOpen.value = false;
+  document.body.style.overflow = 'auto';
+};
+</script>

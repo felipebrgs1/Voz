@@ -1,5 +1,6 @@
 <template>
-  <div class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75" @click="handleClickOutside">
+  <div class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50"
+    @click="handleClickOutside">
     <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-3xl modal-content">
       <h2 class="text-2xl font-bold mb-4">{{ project.title }}</h2>
       <div class="mb-4">

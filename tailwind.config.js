@@ -8,8 +8,23 @@ export default {
       },
     },
     fontFamily: {
-      sans: ['Montserrat', 'sans-serif'], // Define Montserrat como a fonte padrão
+      sans: ['Montserrat', 'sans-serif'],
     },
   },
-  plugins: [],
+  plugins: [
+    ({ addBase }) => {
+      addBase({
+        html: {
+          '-webkit-font-smoothing': 'antialiased',
+          '-moz-osx-font-smoothing': 'grayscale',
+          'font-smooth': 'always',
+        },
+        body: {
+          '-webkit-font-smoothing': 'antialiased',
+          '-moz-osx-font-smoothing': 'grayscale',
+          'font-smooth': 'always',
+        },
+      });
+    },
+  ],
 };

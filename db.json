@@ -2,7 +2,7 @@
   "Tabela": [
     {
       "id": "1",
-      "title": "mustang",
+      "title": "Mustang",
       "data": "2022",
       "potencia": "8",
       "velocidademaxima": "250",
@@ -11,7 +11,7 @@
     },
     {
       "id": "2",
-      "title": "mustang Gt",
+      "title": "Mustang Gt",
       "data": "2024",
       "potencia": "5",
       "conforto": "7",
@@ -20,7 +20,7 @@
     },
     {
       "id": "3",
-      "title": "mustang 500",
+      "title": "Mustang 500",
       "data": "2020",
       "potencia": "6",
       "conforto": "9",
