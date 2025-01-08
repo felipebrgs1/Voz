@@ -11,12 +11,12 @@
         </div>
         <div class="mb-4">
           <label for="imageUrl" class="block text-gray-700 font-bold mb-2">URL da Imagem</label>
-          <input type="text" id="imageUrl" v-model="carStore.newCar.imageUrl"
+          <input type="text" id="imageUrl" v-model="carStore.newCar.imageurl"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
         </div>
         <div class="mb-4">
           <label for="data" class="block text-gray-700 font-bold mb-2">Ano</label>
-          <input type="number" id="data" v-model="carStore.newCar.data"
+          <input type="text" id="data" v-model="carStore.newCar.data"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             min="1900" max="2100" required />
         </div>
@@ -58,7 +58,7 @@
 import { defineEmits } from 'vue';
 import { useCarStore } from '../store/CarStore';
 
-const emit = defineEmits(['close', 'carAdded']);
+const emit = defineEmits(['close', 'carAdded', 'closeModal']);
 const carStore = useCarStore();
 
 const handleAddCar = async () => {

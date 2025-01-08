@@ -6,10 +6,10 @@
 
     <section class="min-h-screen bg-gray-100 p-8 content-center">
       <div class="max-w-6xl mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20">
-          <Card v-if="project.length > 0" :project="project[0]" />
-          <Card v-if="project.length > 1" :project="project[1]" />
-          <Card v-if="project.length > 2" :project="project[2]" />
+        <div v-if="loading" class="text-center">Carregando...</div>
+        <div v-else-if="err" class="text-center text-red-500">Erro ao carregar os dados: {{ err }}</div>
+        <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20">
+          <Card v-for="(item, index) in carStore.cars" :key="index" :project="item" />
         </div>
       </div>
     </section>
@@ -18,7 +18,7 @@
       style="background-image: url('CarroFinal.png');">
       <div class="absolute inset-0 bg-black/50"></div>
       <div class="relative container mx-auto h-full flex flex-col items-center justify-center px-4">
-        <p class="texto max-w-2xl mb-8 ">
+        <p class="texto max-w-2xl mb-8">
           O Ford Mustang é um automóvel desportivo produzido pela Ford Motor Company. O carro foi apresentado ao público
           em 17 de abril de 1964 durante a New York World's Fair. O Mustang, apesar de ter sofrido grandes alterações ao
           longo dos anos é a mais antiga linha de automóveis da Ford.
@@ -29,37 +29,34 @@
             Ver Carros
           </button>
         </a>
-
       </div>
     </section>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import axios from 'axios'
-import Card from '../components/Card.vue'
-const project = ref([]);
+import { ref, onMounted } from "vue";
+import { useCarStore } from "../store/CarStore";
+import Card from "../components/Card.vue";
+
 const loading = ref(true);
 const err = ref(null);
-const fetchProjectData = async () => {
+const carStore = useCarStore();
+
+onMounted(async () => {
   try {
-    const response = await axios.get('http://localhost:3000/Tabela');
-    project.value = response.data;
+    await carStore.getCars();
   } catch (error) {
     err.value = error.message;
   } finally {
     loading.value = false;
   }
-};
-onMounted(() => {
-  fetchProjectData();
 });
 
 function scrollToSection(sectionId) {
   const element = document.getElementById(sectionId);
   if (element) {
-    element.scrollIntoView({ behavior: 'smooth' });
+    element.scrollIntoView({ behavior: "smooth" });
   }
 }
 </script>
@@ -73,6 +70,6 @@ function scrollToSection(sectionId) {
   text-align: right;
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
-  color: #FFFFFF
+  color: #FFFFFF;
 }
 </style>

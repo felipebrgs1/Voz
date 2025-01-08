@@ -3,7 +3,7 @@
     class="bg-white border-2 rounded-lg shadow-lg overflow-hidden transform hover:scale-105 cursor-pointer transition-transform duration-300 flex flex-col md:flex-row h-full w-full"
     @click="openModal">
     <div class="relative h-48 md:h-full md:w-1/4 overflow-hidden flex items-center justify-center">
-      <img v-if="project.imageUrl" :src="project.imageUrl" :alt="project.title" class="object-contain max-h-full" />
+      <img v-if="project.imageurl" :src="project.imageurl" :alt="project.title" class="object-contain max-h-full" />
       <div v-else class="h-full bg-gray-200 flex items-center justify-center">
         <span class="text-gray-400">Imagem não disponível</span>
       </div>
@@ -12,7 +12,6 @@
     <div class="p-6 md:w-3/4 flex flex-col justify-between">
       <div>
         <h3 class="font-bold text-xl mb-2 text-gray-800">{{ project.title }}</h3>
-        <p class="text-gray-600 mb-4">{{ project.description }}</p>
         <div class="flex flex-wrap justify-between items-center">
           <div class="flex items-center mb-2">
             <img src="/data.png" class="inline w-6 h-6 mr-2" />
@@ -40,7 +39,8 @@
                 <path stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
               </svg>
             </button>
-            <button @click="deleteCard" class="w-10 h-10 rounded-full bg-transparent flex items-center justify-center">
+            <button @click="deleteCar(project.id)"
+              class="w-10 h-10 rounded-full bg-transparent flex items-center justify-center">
               <svg class="w-6 h-6 text-red-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                 height="24" fill="currentColor" viewBox="0 0 24 24">
                 <path fill-rule="evenodd"
@@ -58,6 +58,9 @@
 <script setup>
 import { defineProps, defineEmits } from 'vue';
 import axios from 'axios';
+import { useCarStore } from '../store/CarStore';
+
+const CarStore = useCarStore();
 
 const props = defineProps({
   project: {
@@ -67,7 +70,6 @@ const props = defineProps({
       id: 1,
       imageUrl: '',
       title: '',
-      description: '',
       data: '',
       velocidademaxima: '',
       potencia: '',
@@ -76,19 +78,17 @@ const props = defineProps({
   }
 });
 
-const emit = defineEmits(['onDelete', 'openModal']);
+const emit = defineEmits(['close', 'openModal']);
 
 const openModal = () => {
   emit('openModal', props.project);
 };
-
-const deleteCard = async () => {
+const deleteCar = async (id) => {
   try {
-    await axios.delete(`http://localhost:3000/Tabela/${props.project.id}`);
-    console.log('Projeto excluído com sucesso:', props.project.id);
-    emit('onDelete', props.project.id); // Notifica o componente pai para atualizar a lista
+    CarStore.deleteCar(id)
+    closeModal();
   } catch (error) {
-    console.error('Erro ao excluir o projeto:', error);
+    console.error(error);
   }
 };
 </script>

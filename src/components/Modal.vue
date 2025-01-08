@@ -4,7 +4,7 @@
     <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-3xl modal-content">
       <h2 class="text-2xl font-bold mb-4">{{ project.title }}</h2>
       <div class="mb-4">
-        <img v-if="project.imageUrl" :src="project.imageUrl" :alt="project.title" class="object-cover w-full mb-4" />
+        <img v-if="project.imageurl" :src="project.imageurl" :alt="project.title" class="object-cover w-full mb-4" />
         <div v-else class="h-48 bg-gray-200 flex items-center justify-center mb-4">
           <span class="text-gray-400">Imagem não disponível</span>
         </div>

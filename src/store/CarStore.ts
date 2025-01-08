@@ -1,65 +1,65 @@
 import { defineStore } from "pinia";
-import axios from "axios";
-export const useCarStore = defineStore("car", {
-	state: () => ({
-		newCar: {
-			title: "",
-			description: "",
-			imageUrl: "",
-			data: "",
-			velocidademaxima: "",
-			potencia: "",
-			conforto: "",
-		},
-	}),
-	actions: {
-		async addCar() {
-			// Validação adicional
-			if (
-				Number.parseInt(this.newCar.data) < 1900 ||
-				Number.parseInt(this.newCar.data) > 2100
-			) {
-				alert("Ano deve estar entre 1900 e 2100.");
-				return;
-			}
-			if (
-				Number.parseFloat(this.newCar.potencia) < 0 ||
-				Number.parseFloat(this.newCar.potencia) > 10
-			) {
-				alert("Potência deve estar entre 0 e 10.");
-				return;
-			}
-			if (
-				Number.parseFloat(this.newCar.conforto) < 0 ||
-				Number.parseFloat(this.newCar.conforto) > 10
-			) {
-				alert("Conforto deve estar entre 0 e 10.");
-				return;
-			}
+import sql from "../../neodrive";
 
+export const useCarStore = defineStore("car", {
+  state: () => ({
+    newCar: {
+      title: "",
+      imageurl: "",
+      data: "",
+      velocidademaxima: "",
+      potencia: "",
+      conforto: "",
+    },
+    cars: [],
+  }),
+  actions: {
+    async addCar() {
 			try {
-				const response = await axios.post(
-					"http://localhost:3000/Tabela",
-					this.newCar,
-				);
+				const { title, imageurl, data, velocidademaxima, potencia, conforto } = this.newCar;
+		
+				await sql(`
+					INSERT INTO projects (title, imageurl, "data", velocidademaxima, potencia, conforto)
+					VALUES ($1, $2, $3, $4, $5, $6);
+				`, [title, imageurl, data, velocidademaxima, potencia, conforto]);
+		
+				console.log("Carro adicionado com sucesso!");
 				this.resetCar();
-				console.log("Carro adicionado com sucesso:", response.data);
-				return response.data;
+				await this.getCars(); // Atualiza a lista de carros após adicionar um novo
 			} catch (error) {
 				console.error("Erro ao adicionar carro:", error.message);
 				alert("Erro ao adicionar carro. Tente novamente.");
 			}
+		}
+		,
+    resetCar() {
+      this.newCar = {
+        title: "",
+        imageurl: "",
+        data: "",
+        velocidademaxima: "",
+        potencia: "",
+        conforto: "",
+      };
+    },
+    async getCars() {
+      try {
+        const response = await sql`SELECT * FROM projects`;
+        this.cars = response // Certifique-se de que a resposta tenha a propriedade 'rows'
+      } catch (error) {
+        console.error('Erro ao carregar os carros:', error.message);
+        alert('Erro ao carregar os carros. Tente novamente.');
+      }
+    },
+		async deleteCar(id: number) {
+			try {
+				await sql`DELETE FROM projects WHERE id = ${id}`;
+				console.log('Carro excluído com sucesso:', id);
+				await this.getCars(); 
+			} catch (error) {
+				console.error('Erro ao excluir o carro:', error.message);
+				alert('Erro ao excluir o carro. Tente novamente.');
+			}
 		},
-		resetCar() {
-			this.newCar = {
-				title: "",
-				description: "",
-				imageUrl: "",
-				data: "",
-				velocidademaxima: "",
-				potencia: "",
-				conforto: "",
-			};
-		},
-	},
+  },
 });
