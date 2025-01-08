@@ -11,9 +11,9 @@
       <h3 class="font-bold text-xl mb-2 text-gray-800 text-center">{{ project.title }}</h3>
       <p class="text-gray-600 mb-4">{{ project.description }}</p>
       <p><img src="/data.png" class="inline size-8 mr-2 mb-2"> {{ project.data }}</p>
-      <p><img src="/velocidademaxima.png" class="inline size-8 mr-2 mb-2"> {{ project.velocidademaxima }}</p>
-      <p><img src="/potencia.png" class="inline size-8 mr-2 mb-2"> {{ project.potencia }}</p>
-      <p><img src="/conforto.png" class="inline size-8 mr-2 mb-2"> {{ project.conforto }}</p>
+      <p><img src="/velocidademaxima.png" class="inline size-8 mr-2 mb-2"> {{ project.velocidademaxima + " Km/h" }}</p>
+      <p><img src="/potencia.png" class="inline size-8 mr-2 mb-2"> {{ project.potencia + "/10" }}</p>
+      <p><img src="/conforto.png" class="inline size-8 mr-2 mb-2"> {{ project.conforto + "/10" }}</p>
     </div>
   </div>
 </template>

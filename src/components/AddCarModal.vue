@@ -16,25 +16,25 @@
         </div>
         <div class="mb-4">
           <label for="data" class="block text-gray-700 font-bold mb-2">Ano</label>
-          <input type="number" id="data" v-model="newCar.data"
+          <input type="text" id="data" v-model="newCar.data"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             min="1900" max="2100" required />
         </div>
         <div class="mb-4">
           <label for="velocidademaxima" class="block text-gray-700 font-bold mb-2">Velocidade Máxima</label>
-          <input type="number" id="velocidademaxima" v-model="newCar.velocidademaxima"
+          <input type="text" id="velocidademaxima" v-model="newCar.velocidademaxima"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             required />
         </div>
         <div class="mb-4">
           <label for="potencia" class="block text-gray-700 font-bold mb-2">Potência</label>
-          <input type="number" id="potencia" v-model="newCar.potencia"
+          <input type="text" id="potencia" v-model="newCar.potencia"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             min="0" max="10" required />
         </div>
         <div class="mb-4">
           <label for="conforto" class="block text-gray-700 font-bold mb-2">Conforto</label>
-          <input type="number" id="conforto" v-model="newCar.conforto"
+          <input type="text" id="conforto" v-model="newCar.conforto"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             min="0" max="10" required />
         </div>

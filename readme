@@ -1,0 +1,5 @@
+0- npm i    
+
+1- npx json-server db.json    
+
+2- npm run dev    

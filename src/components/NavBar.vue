@@ -1,5 +1,5 @@
 <template>
-  <nav :class="navbarClass" class="fixed top-0 left-0 w-full bg-black bg-opacity-60 backdrop-blur-md shadow-md z-50">
+  <nav :class="navbarClass" class="fixed top-0 left-0 w-full bg-black bg-opacity-50 backdrop-blur-md shadow-md z-50">
     <div class="max-w-7xl mx-auto px-4">
       <div class="flex items-center justify-between h-16">
         <div class="flex-shrink-0">

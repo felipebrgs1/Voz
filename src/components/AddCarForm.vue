@@ -10,12 +10,6 @@
             required />
         </div>
         <div class="mb-4">
-          <label for="description" class="block text-gray-700 font-bold mb-2">Descrição</label>
-          <textarea id="description" v-model="newCar.description"
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            required></textarea>
-        </div>
-        <div class="mb-4">
           <label for="imageUrl" class="block text-gray-700 font-bold mb-2">URL da Imagem</label>
           <input type="text" id="imageUrl" v-model="newCar.imageUrl"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
@@ -34,13 +28,13 @@
         </div>
         <div class="mb-4">
           <label for="potencia" class="block text-gray-700 font-bold mb-2">Potência</label>
-          <input type="number" id="potencia" v-model="newCar.potencia"
+          <input type="text" id="potencia" v-model="newCar.potencia"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             min="0" max="10" required />
         </div>
         <div class="mb-4">
           <label for="conforto" class="block text-gray-700 font-bold mb-2">Conforto</label>
-          <input type="number" id="conforto" v-model="newCar.conforto"
+          <input type="text" id="conforto" v-model="newCar.conforto"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             min="0" max="10" required />
         </div>
