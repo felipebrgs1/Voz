@@ -18,15 +18,15 @@
           </div>
           <div class="flex items-center mb-2">
             <img src="/velocidademaxima.png" class="inline size-8 mr-2" />
-            <span>{{ project.velocidademaxima }}</span>
+            <span>{{ project.velocidademaxima + "Km/h" }}</span>
           </div>
           <div class="flex items-center mb-2">
             <img src="/potencia.png" class="inline size-8 mr-2" />
-            <span>{{ project.potencia }}</span>
+            <span>{{ project.potencia + "/10" }}</span>
           </div>
           <div class="flex items-center mb-2">
             <img src="/conforto.png" class="inline size-8 mr-2" />
-            <span>{{ project.conforto }}</span>
+            <span>{{ project.conforto + "/10" }}</span>
           </div>
         </div>
       </div>
