@@ -14,19 +14,19 @@
         <h3 class="font-bold text-xl mb-2 text-gray-800">{{ project.title }}</h3>
         <div class="flex flex-wrap justify-between items-center">
           <div class="flex items-center mb-2">
-            <img src="/data.png" class="inline w-6 h-6 mr-2" />
+            <img src="/data.svg" class="inline w-6 h-6 mr-2" />
             <span>{{ project.data }}</span>
           </div>
           <div class="flex items-center mb-2">
-            <img src="/velocidademaxima.png" class="inline w-6 h-6 mr-2" />
+            <img src="/velocidademaxima.svg" class="inline w-6 h-6 mr-2" />
             <span>{{ project.velocidademaxima + " Km/h" }}</span>
           </div>
           <div class="flex items-center mb-2">
-            <img src="/potencia.png" class="inline w-6 h-6 mr-2" />
+            <img src="/potencia.svg" class="inline w-6 h-6 mr-2" />
             <span>{{ project.potencia + "/10" }}</span>
           </div>
           <div class="flex items-center mb-2">
-            <img src="/conforto.png" class="inline w-6 h-6 mr-2" />
+            <img src="/conforto.svg" class="inline w-6 h-6 mr-2" />
             <span>{{ project.conforto + "/10" }}</span>
           </div>
           <div class="flex justify-center">
