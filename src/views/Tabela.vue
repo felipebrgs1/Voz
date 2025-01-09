@@ -12,13 +12,13 @@
         </button>
       </div>
     </div>
-    <AddCarModal v-if="isAddCarModalVisible" @close="closeAddCarModal" @carAdded="handleCarAdded" />
+    <AddCarModal v-if="isAddCarModalVisible" @closeAdd="closeAdd" />
     <ul class="grid grid-cols-1 gap-4">
       <li v-for="car in carStore.cars" :key="car.id" class="bg-gray-200 p-4 rounded-lg">
-        <CardTabela :project="car" @onDelete="handleDelete" @openModal="openModal" />
+        <CardTabela :project="car" @openModal="openModal" />
       </li>
     </ul>
-    <Modal v-if="selectedCar" :project="selectedCar" @close="closeModal" />
+    <Modal v-if="selectedCar" :project="selectedCar" @close="close" />
   </div>
 </template>
 <script setup lang="ts">
@@ -37,7 +37,7 @@ const openModal = (car: any) => {
   selectedCar.value = car;
 };
 
-const closeModal = () => {
+const close = () => {
   selectedCar.value = null;
 };
 
@@ -45,14 +45,10 @@ const toggleAddCarModal = () => {
   isAddCarModalVisible.value = !isAddCarModalVisible.value;
 };
 
-const closeAddCarModal = () => {
+const closeAdd = () => {
   isAddCarModalVisible.value = false;
 };
 
-const handleCarAdded = (newCar: any) => {
-  carStore.addCar(newCar);
-  closeAddCarModal();
-};
 
 onMounted(() => {
   carStore.getCars();

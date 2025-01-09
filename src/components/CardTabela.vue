@@ -78,15 +78,18 @@ const props = defineProps({
   }
 });
 
-const emit = defineEmits(['close', 'openModal']);
+const emit = defineEmits(['closeAdd', 'openModal']);
 
 const openModal = () => {
   emit('openModal', props.project);
 };
+const closeAdd = () => {
+  emit('closeAdd');
+}
 const deleteCar = async (id) => {
   try {
     CarStore.deleteCar(id)
-    closeModal();
+    closeAdd();
   } catch (error) {
     console.error(error);
   }

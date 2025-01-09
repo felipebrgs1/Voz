@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import sql from "../../neodrive";
-
+import { ref } from "vue";
 export const useCarStore = defineStore("car", {
   state: () => ({
     newCar: {
@@ -12,6 +12,7 @@ export const useCarStore = defineStore("car", {
       conforto: "",
     },
     cars: [],
+    isModalOpen:ref(false),
   }),
   actions: {
     async addCar() {
@@ -25,7 +26,7 @@ export const useCarStore = defineStore("car", {
 		
 				console.log("Carro adicionado com sucesso!");
 				this.resetCar();
-				await this.getCars(); // Atualiza a lista de carros após adicionar um novo
+				await this.getCars(); 
 			} catch (error) {
 				console.error("Erro ao adicionar carro:", error.message);
 				alert("Erro ao adicionar carro. Tente novamente.");
@@ -45,7 +46,7 @@ export const useCarStore = defineStore("car", {
     async getCars() {
       try {
         const response = await sql`SELECT * FROM projects`;
-        this.cars = response // Certifique-se de que a resposta tenha a propriedade 'rows'
+        this.cars = response 
       } catch (error) {
         console.error('Erro ao carregar os carros:', error.message);
         alert('Erro ao carregar os carros. Tente novamente.');

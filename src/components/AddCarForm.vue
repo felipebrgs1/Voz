@@ -41,7 +41,7 @@
         <div class="flex justify-end">
           <button type="button"
             class="text-white bg-gray-500 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2"
-            @click="closeModal">
+            @click="close">
             Cancelar
           </button>
           <button type="submit"
@@ -58,18 +58,16 @@
 import { defineEmits } from 'vue';
 import { useCarStore } from '../store/CarStore';
 
-const emit = defineEmits(['close', 'carAdded', 'closeModal']);
+const emit = defineEmits(['close']);
 const carStore = useCarStore();
 
 const handleAddCar = async () => {
-  const newCar = await carStore.addCar();
-  if (newCar) {
-    emit('carAdded', newCar);
-    closeModal();
-  }
+  await carStore.addCar();
+  close();
+
 };
 
-const closeModal = () => {
+const close = () => {
   emit('close');
 };
 </script>

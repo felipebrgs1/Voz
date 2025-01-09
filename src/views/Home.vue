@@ -1,8 +1,13 @@
 <template>
   <div>
-    <section id="home" class="min-h-screen bg-cover bg-center relative" style="background-image: url('HomeCar.jpeg');">
-      <div class="absolute inset-0 bg-black/50"></div>
-    </section>
+    <div class="relative">
+      <div id="home" class="min-h-screen bg-cover bg-center flex items-center justify-center"
+        style="background-image: url('car1.svg');">
+
+      </div>
+    </div>
+
+
 
     <section class="min-h-screen bg-gray-100 p-8 content-center">
       <div class="max-w-6xl mx-auto">
@@ -53,11 +58,8 @@ onMounted(async () => {
   }
 });
 
-function scrollToSection(sectionId) {
-  const element = document.getElementById(sectionId);
-  if (element) {
-    element.scrollIntoView({ behavior: "smooth" });
-  }
+function scrollToHome() {
+  document.getElementById("home").scrollIntoView({ behavior: "smooth" });
 }
 </script>
 

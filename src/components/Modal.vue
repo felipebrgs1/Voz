@@ -34,7 +34,7 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits, onMounted, onUnmounted } from 'vue';
+import { defineProps, defineEmits } from 'vue';
 
 const props = defineProps({
   project: {
@@ -44,28 +44,22 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['close']);
-
 const close = () => {
   emit('close');
 };
 
 const handleClickOutside = (event) => {
-  if (!event.target.closest('.modal-content')) {
+  if (event.target === event.currentTarget) {
     close();
   }
 };
 
-const handleKeydown = (event) => {
+const escapeKey = (event) => {
   if (event.key === 'Escape') {
     close();
   }
 };
 
-onMounted(() => {
-  window.addEventListener('keydown', handleKeydown);
-});
+document.addEventListener('keydown', escapeKey);
 
-onUnmounted(() => {
-  window.removeEventListener('keydown', handleKeydown);
-});
 </script>

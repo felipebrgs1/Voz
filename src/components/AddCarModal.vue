@@ -1,5 +1,6 @@
 <template>
-  <div class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50">
+  <div class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50"
+    @click="handleClickOutside">
     <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-3xl">
       <h3 class="text-xl font-bold mb-4">Adicionar Novo Carro</h3>
       <form @submit.prevent="handleAddCar">
@@ -39,7 +40,7 @@
         </div>
         <div class="mb-4">
           <label for="imageUrl" class="block text-gray-700 font-bold mb-2">URL da Imagem</label>
-          <input type="text" id="imageUrl" v-model="carStore.newCar.imageUrl"
+          <input type="text" id="imageUrl" v-model="carStore.newCar.imageurl"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
 
         </div>
@@ -47,7 +48,7 @@
         <div class="flex justify-end">
           <button type="button"
             class="text-white bg-red-500 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2"
-            @click="closeModal">
+            @click="close">
             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
               width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
               <path fill-rule="evenodd"
@@ -76,18 +77,29 @@
 import { defineEmits } from 'vue';
 import { useCarStore } from '../store/CarStore';
 
-const emit = defineEmits(['close', 'carAdded']);
+const emit = defineEmits(['closeAdd']);
 const carStore = useCarStore();
 
 const handleAddCar = async () => {
-  const newCar = await carStore.addCar();
-  if (newCar) {
-    emit('carAdded', newCar);
-    closeModal();
+  await carStore.addCar();
+  closeAdd();
+};
+
+const closeAdd = () => {
+  emit('closeAdd');
+};
+const handleClickOutside = (event) => {
+  if (event.target === event.currentTarget) {
+    closeAdd();
   }
 };
 
-const closeModal = () => {
-  emit('close');
+const escapeKey = (event) => {
+  if (event.key === 'Escape') {
+    closeAdd();
+  }
 };
+
+document.addEventListener('keydown', escapeKey);
+
 </script>
