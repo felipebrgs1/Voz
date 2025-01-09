@@ -12,19 +12,19 @@
       <p class="text-gray-600 mb-4">{{ project.description }}</p>
       <div class="flex flex-wrap justify-between">
         <div class="flex items-center mb-2">
-          <img src="/data.png" class="inline size-8 mr-2" />
+          <img src="/data.svg" class="inline size-8 mr-2" />
           <span>{{ project.data }}</span>
         </div>
         <div class="flex items-center mb-2">
-          <img src="/velocidademaxima.png" class="inline size-8 mr-2" />
+          <img src="/velocidademaxima.svg" class="inline size-8 mr-2" />
           <span>{{ project.velocidademaxima }}</span>
         </div>
         <div class="flex items-center mb-2">
-          <img src="/potencia.png" class="inline size-8 mr-2" />
+          <img src="/potencia.svg" class="inline size-8 mr-2" />
           <span>{{ project.potencia }}</span>
         </div>
         <div class="flex items-center mb-2">
-          <img src="/conforto.png" class="inline size-8 mr-2" />
+          <img src="/conforto.svg" class="inline size-8 mr-2" />
           <span>{{ project.conforto }}</span>
         </div>
       </div>

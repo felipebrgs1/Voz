@@ -4,8 +4,7 @@
       <div class="flex items-center justify-between h-16">
         <div class="flex-shrink-0">
           <button @click="navigateToPage('home')" class="text-white font-bold text-2xl">
-
-            <img src="/Logo.png" alt="Logo" class="h-10 w-auto">
+            <img src="/logo.svg" alt="Logo" class="h-10 w-auto">
           </button>
         </div>
 
@@ -29,7 +28,7 @@
 
       <div v-show="isMobileMenuOpen" class="md:hidden">
         <div class="px-2 pt-2 pb-3 space-y-1">
-          <button v-for="item in menuItems" :key="item" @click="navigateToPage(item.toLowerCase())"
+          <button v-for="item in menuItems" :key="item" @click="handleMobileMenuItemClick(item.toLowerCase())"
             class="w-full text-left px-4 py-2 rounded-lg text-gray-200 hover:bg-indigo-100 hover:text-indigo-600 transition-colors block">
             {{ item }}
           </button>
@@ -40,14 +39,14 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+
 const menuItems = ['Home', 'Sobre', 'Tabela', 'Fale Conosco']
 const isMobileMenuOpen = ref(false)
 const navbarClass = ref('text-gray-300')
 
 const router = useRouter()
-
 
 function navigateToPage(pageName) {
   router.push({ name: pageName.replace(/\s+/g, '') })
@@ -57,6 +56,8 @@ function toggleMobileMenu() {
   isMobileMenuOpen.value = !isMobileMenuOpen.value
 }
 
-
-
+function handleMobileMenuItemClick(pageName) {
+  navigateToPage(pageName)
+  toggleMobileMenu()
+}
 </script>
