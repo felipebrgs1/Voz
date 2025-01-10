@@ -7,48 +7,50 @@
       <div class="flex basis-1/4 justify-end">
         <button type="button"
           class="self-end text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-          @click="toggleAddCarModal">
+          @click="openAddCarModal">
           Adicionar Carro
         </button>
       </div>
     </div>
-    <AddCarModal v-if="isAddCarModalVisible" @closeAdd="closeAdd" />
+
+    <!-- Modal para Adicionar/Edição -->
+    <AddCarModal v-if="isModalVisible" :isEditing="isEditing" :carToEdit="selectedCar" @close="closeModal" />
+
+    <!-- Lista de Carros -->
     <ul class="grid grid-cols-1 gap-4">
       <li v-for="car in carStore.cars" :key="car.id" class="bg-gray-200 p-4 rounded-lg">
-        <CardTabela :project="car" @openModal="openModal" />
+        <CardTabela :project="car" @openModal="openEditCarModal(car)" />
       </li>
     </ul>
-    <Modal v-if="selectedCar" :project="selectedCar" @close="close" />
   </div>
 </template>
+
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import CardTabela from '../components/CardTabela.vue';
-import Modal from '../components/Modal.vue';
 import AddCarModal from '../components/AddCarModal.vue';
 import { useCarStore } from '../store/CarStore';
 
 const carStore = useCarStore();
-const isAddCarModalVisible = ref(false);
+const isModalVisible = ref(false);
+const isEditing = ref(false);
 const selectedCar = ref(null);
 
-
-const openModal = (car: any) => {
-  selectedCar.value = car;
-};
-
-const close = () => {
+const openAddCarModal = () => {
+  isEditing.value = false;
   selectedCar.value = null;
+  isModalVisible.value = true;
 };
 
-const toggleAddCarModal = () => {
-  isAddCarModalVisible.value = !isAddCarModalVisible.value;
+const openEditCarModal = (car) => {
+  isEditing.value = true;
+  selectedCar.value = car;
+  isModalVisible.value = true;
 };
 
-const closeAdd = () => {
-  isAddCarModalVisible.value = false;
+const closeModal = () => {
+  isModalVisible.value = false;
 };
-
 
 onMounted(() => {
   carStore.getCars();

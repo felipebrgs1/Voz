@@ -1,6 +1,15 @@
 import { defineStore } from "pinia";
 import sql from "../../neodrive";
 import { ref } from "vue";
+type Car = {
+  id: number;
+  title: string;
+  imageurl: string;
+  data: string;
+  velocidademaxima: string;
+  potencia: string;
+  conforto: string;
+}
 export const useCarStore = defineStore("car", {
   state: () => ({
     newCar: {
@@ -62,5 +71,20 @@ export const useCarStore = defineStore("car", {
 				alert('Erro ao excluir o carro. Tente novamente.');
 			}
 		},
+    async editCar(car: Car) {
+      try {
+        const { id, title, imageurl, data, velocidademaxima, potencia, conforto } = car;
+        await sql(`
+          UPDATE projects
+          SET title = $1, imageurl = $2, "data" = $3, velocidademaxima = $4, potencia = $5, conforto = $6
+          WHERE id = $7;
+        `, [title, imageurl, data, velocidademaxima, potencia, conforto, id]);
+        console.log("Carro editado com sucesso!");
+        await this.getCars();
+      } catch (error) {
+        console.error("Erro ao editar carro:", error.message);
+        alert("Erro ao editar carro. Tente novamente.");
+      }
+    }
   },
 });

@@ -2,7 +2,7 @@
   <div>
     <div class="transform hover:scale-105 transition-transform duration-300 relative z-10">
       <div class="relative h-48 z-10 translate-y-12">
-        <img v-if="project.imageurl" :src="project.imageurl" :alt="project.title" class="w-full h-full object-cover" />
+        <img v-if="project.imageurl" :src="project.imageurl" :alt="project.title" class="size-full object-cover" />
         <div v-else class="h-full bg-gray-200 flex items-center justify-center">
           <span class="text-gray-400">Imagem não disponível</span>
         </div>

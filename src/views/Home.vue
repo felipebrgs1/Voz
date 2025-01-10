@@ -23,9 +23,9 @@
         <div class="w-full md:w-1/2 h-full flex flex-col items-center justify-center relative">
           <div class="absolute inset-0 blur-background"></div>
 
-          <div class="relative z-10 max-w-xl w-full space-y-6 p-4 md:p-8">
+          <div class="relative z-10 max-w-xl space-y-6 p-4 w-10/12">
             <h1 id="titulo">Mustang</h1>
-            <p class="texto md:text-xl  ">
+            <p class="texto  ">
               O Ford Mustang é um automóvel desportivo produzido pela Ford Motor Company. O carro foi apresentado ao
               público em 17 de abril de 1964 durante a New York World's Fair. O Mustang, apesar de ter sofrido grandes
               alterações ao longo dos anos é a mais antiga linha de automóveis da Ford.
