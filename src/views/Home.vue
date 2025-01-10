@@ -125,7 +125,6 @@ function scrollToHome() {
   }
 }
 
-/* Ensure smooth scrolling */
 html {
   scroll-behavior: smooth;
 }

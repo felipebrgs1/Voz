@@ -13,10 +13,8 @@
       </div>
     </div>
 
-    <!-- Modal para Adicionar/Edição -->
     <AddCarModal v-if="isModalVisible" :isEditing="isEditing" :carToEdit="selectedCar" @close="closeModal" />
 
-    <!-- Lista de Carros -->
     <ul class="grid grid-cols-1 gap-4">
       <li v-for="car in carStore.cars" :key="car.id" class="bg-gray-200 p-4 rounded-lg">
         <CardTabela :project="car" @openModal="openEditCarModal(car)" />

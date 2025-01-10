@@ -43,7 +43,7 @@
       </div>
     </div>
 
-    <CarModal v-if="carStore.isModalOpen" :project="project" :is-open="carStore.isModalOpen" @close="close" />
+    <CarModal v-if="isModalOpen" :project="project" :is-open="isModalOpen" @close="close" />
   </div>
 </template>
 
@@ -52,6 +52,7 @@ import { ref } from 'vue';
 import CarModal from './Modal.vue';
 import { useCarStore } from '../store/CarStore';
 
+const isModalOpen = ref(false);
 const carStore = useCarStore();
 const props = defineProps({
   project: {
@@ -60,17 +61,17 @@ const props = defineProps({
   }
 });
 
-
 const toggleModal = () => {
-  carStore.isModalOpen = true;
+  isModalOpen.value = true; // Correção aqui
   document.body.style.overflow = 'hidden';
 };
 
 const close = () => {
-  carStore.isModalOpen = false;
+  isModalOpen.value = false; // Correção aqui
   document.body.style.overflow = 'auto';
 };
 </script>
+
 <style scoped>
 .bordercolor {
   border-color: #1D2527

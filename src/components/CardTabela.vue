@@ -89,9 +89,10 @@ const closeAdd = () => {
 const deleteCar = async (id) => {
   try {
     CarStore.deleteCar(id)
-    closeAdd();
   } catch (error) {
     console.error(error);
+  } finally {
+    closeAdd();
   }
 };
 </script>
