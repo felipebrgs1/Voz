@@ -5,19 +5,34 @@
         <p class="text-2xl font-bold">Tabela de carros</p>
       </div>
       <div class="flex basis-1/4 justify-end">
-        <button type="button"
-          class="self-end text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-          @click="openAddCarModal">
+        <button
+          type="button"
+          class="self-end text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-8 py-2 md:py-3 text-center"
+          @click="openAddCarModal"
+        >
           Adicionar Carro
         </button>
       </div>
     </div>
 
-    <AddCarModal v-if="isModalVisible" :isEditing="isEditing" :carToEdit="selectedCar" @close="closeModal" />
+    <AddCarModal
+      v-if="isModalVisible"
+      :isEditing="isEditing"
+      :carToEdit="selectedCar"
+      @close="closeModal"
+    />
 
     <ul class="grid grid-cols-1 gap-4">
-      <li v-for="car in carStore.cars" :key="car.id" class="bg-gray-200 p-4 rounded-lg">
-        <CardTabela :project="car" @openModal="openEditCarModal(car)" />
+      <li
+        v-for="car in carStore.cars"
+        :key="car.id"
+        class="md:p-4 px-1 rounded-lg"
+      >
+        <CardTabela
+          :project="car"
+          @openModal="openEditCarModal(car)"
+          @closeModal="closeModal"
+        />
       </li>
     </ul>
   </div>

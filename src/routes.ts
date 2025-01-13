@@ -21,6 +21,11 @@ const routes = [
 		name: "faleconosco",
 		component: () => import("./views/Faleconosco.vue"),
 	},
+	{
+		path:"/login",
+		name:"login",
+		component: () => import("./views/Login.vue")
+	}
 ];
 
 const router = createRouter({

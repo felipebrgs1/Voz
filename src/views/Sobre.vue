@@ -27,8 +27,9 @@
       </p>
     </div>
     <div class="mt-6 flex justify-center pb-4">
-      <button @click="openContactModal" class="bg-blue-500 text-white px-6 py-3 rounded mr-2">Contato</button>
-      <button @click="openTestDriveModal" class="bg-green-500 text-white px-6 py-3 rounded">Test Drive</button>
+      <button class="bg-blue-500 text-white px-6 py-3 rounded mr-2"><a href="/faleconosco">
+          Contato
+        </a></button>
     </div>
   </div>
 </template>
