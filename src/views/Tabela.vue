@@ -22,7 +22,7 @@
       @close="closeModal"
     />
 
-    <ul class="grid grid-cols-1 gap-4">
+    <ul class="grid grid-cols-1 gap-4 pb-10">
       <li
         v-for="car in carStore.cars"
         :key="car.id"

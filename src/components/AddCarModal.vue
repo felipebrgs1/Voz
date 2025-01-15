@@ -151,13 +151,13 @@ const close = () => {
   emit('close');
 };
 
-const handleClickOutside = (event) => {
+const handleClickOutside = (event: { target: any; currentTarget: any }) => {
   if (event.target === event.currentTarget) {
     close();
   }
 };
 
-const escapeKey = (event) => {
+const escapeKey = (event: { key: string }) => {
   if (event.key === 'Escape') {
     close();
   }
